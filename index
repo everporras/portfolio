@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Everardo Porras — AI Solutions Architect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0D1117;
+      --bg-surface:  #161B22;
+      --bg-deep:     #1C2128;
+      --accent:      #E6A817;
+      --text:        #E6EDF3;
+      --muted:       #7D8590;
+      --border:      #30363D;
+      --pad:         clamp(24px, 8vw, 120px);
+      --maxw:        1100px;
+      --radius:      8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--pad);
+      background: rgba(13,17,23,0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: var(--text);
+    }
+    .nav-logo em { font-style: normal; color: var(--accent); }
+
+    .nav-links { display: flex; gap: clamp(16px,3vw,32px); list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--text); }
+
+    /* ─── SECTION WRAPPER ─── */
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      padding: 0 var(--pad);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 120px;
+      padding-bottom: 80px;
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+
+    .hero-line {
+      width: 0;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-bottom: 36px;
+      animation: grow 0.8s cubic-bezier(.4,0,.2,1) forwards;
+    }
+    @keyframes grow { to { width: 64px; } }
+
+    .eyebrow {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 22px;
+      opacity: 0;
+      animation: up 0.5s ease forwards 0.2s;
+    }
+
+    .h-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(38px, 6vw, 72px);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .h-white  { opacity: 0; animation: up 0.5s ease forwards 0.35s; }
+    .h-muted  { color: var(--muted); opacity: 0; animation: up 0.5s ease forwards 0.5s; }
+    .h-accent { color: var(--accent); min-height: 1.1em; }
+
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 0.8em;
+      background: var(--accent);
+      vertical-align: middle;
+      margin-left: 3px;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-sub {
+      max-width: 520px;
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-top: 32px;
+      opacity: 0;
+      animation: up 0.5s ease forwards 0.65s;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 48px;
+      opacity: 0;
+      animation: up 0.5s ease forwards 0.85s;
+    }
+
+    @keyframes up {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn-p {
+      background: var(--accent);
+      color: #0D1117;
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-p:hover { opacity: 0.88; }
+
+    .btn-s {
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+    .btn-s:hover { border-color: var(--muted); }
+
+    /* ─── SECTION CHROME ─── */
+    .section-block {
+      border-top: 1px solid var(--border);
+      padding: 80px 0;
+    }
+
+    .label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .s-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 40px;
+    }
+    .s-title .m { color: var(--muted); }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 48px;
+    }
+
+    .about-copy p {
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+    .about-copy h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(24px,3vw,36px);
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 24px;
+    }
+    .about-copy h2 em { font-style: normal; color: var(--accent); }
+
+    .stats { display: flex; flex-direction: column; gap: 12px; }
+
+    .stat {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .stat-l { font-size: 13px; color: var(--muted); }
+    .stat-v {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* ─── PROJECTS ─── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .card.open  { border-color: var(--accent); border-left: 3px solid var(--accent); }
+
+    .card-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .card-desc { font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+    .chip {
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .insight {
+      display: none;
+      border-left: 2px solid var(--accent);
+      padding-left: 16px;
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.75;
+    }
+
+    /* ASIS card */
+    .asis {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .asis:hover { border-color: var(--accent); }
+    .asis.open  { border-color: var(--accent); border-left: 3px solid var(--accent); }
+
+    .asis-inner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .asis-quote {
+      background: var(--bg);
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      padding: 22px 26px;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.85;
+      font-style: italic;
+    }
+
+    .hint {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── STACK ─── */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .stack-block {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+    .stack-cat {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .stack-item { font-size: 14px; color: var(--text); line-height: 2.1; }
+
+    /* ─── CONTACT ─── */
+    .contact-body {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+      max-width: 480px;
+      margin-top: 0;
+      margin-bottom: 44px;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 22px; }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--accent); }
+    .arrow { color: var(--accent); font-family: monospace; font-size: 18px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px var(--pad);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .f-copy { font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--muted); }
+    .f-tag  { font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--muted); }
+    .f-tag em { font-style: normal; color: var(--accent); }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">EP <em>·</em> AI ARCHITECT</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-line"></div>
+    <p class="eyebrow">Everardo Porras Muñoz · AI Solutions Architect</p>
+    <h1 class="h-title h-white">Built with AI.</h1>
+    <h1 class="h-title h-muted">This isn't a pitch —</h1>
+    <h1 class="h-title h-accent" id="typed-line"><span id="typed-text"></span><span class="cursor"></span></h1>
+    <p class="hero-sub">Every tool, workflow, and system here was designed, built, and shipped — not theorized.</p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-p">VIEW PROJECTS</a>
+      <a href="#contact" class="btn-s">Get in touch</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <div class="section-block" id="about">
+    <div class="wrap">
+      <p class="label">About</p>
+      <div class="about-grid">
+        <div class="about-copy">
+          <h2>Self-taught.<br><em>Production-proven.</em></h2>
+          <p>I didn't study AI architecture — I built it. Starting from industrial kitchen design consulting on landmark hospitality projects (Grupo Vidanta), through zero-error procurement automation for Brose and Volkswagen manufacturing plants, to running AI-augmented freight dispatch operations: every system I've built has been in response to a real problem with real stakes.</p>
+          <p>I taught myself AutoCAD to the highest proficiency in a 100+ person engineering firm. I built a production AI platform before most companies had an AI policy. The pattern is consistent: identify what's needed, learn it completely, ship it — then move to the next level.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><span class="stat-l">Years of technical consulting</span><span class="stat-v">10+</span></div>
+          <div class="stat"><span class="stat-l">Years AI-augmented operations</span><span class="stat-v">5</span></div>
+          <div class="stat"><span class="stat-l">Production AI systems shipped</span><span class="stat-v">5</span></div>
+          <div class="stat"><span class="stat-l">Languages of operation</span><span class="stat-v">EN / ES</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section-block" id="projects">
+    <div class="wrap">
+      <p class="label">Projects</p>
+      <h2 class="s-title">Five systems. All shipped.</h2>
+
+      <div class="cards-grid">
+
+        <div class="card" onclick="toggleCard(this)">
+          <p class="card-tag">Full-Stack · Production</p>
+          <h3 class="card-title">AI Dispatch Platform</h3>
+          <p class="card-desc">End-to-end freight dispatch platform with AI-powered load management, automated broker communication, and real-time operational visibility. Built and running in production.</p>
+          <div class="chips">
+            <span class="chip">Next.js</span><span class="chip">Firebase</span><span class="chip">GenKit</span><span class="chip">TypeScript</span><span class="chip">Tailwind</span>
+          </div>
+          <p class="insight">"Replaced a manual folder-based workflow with a living AI system — in production, not in a sandbox."</p>
+        </div>
+
+        <div class="card" onclick="toggleCard(this)">
+          <p class="card-tag">AI Workflow · Claude</p>
+          <h3 class="card-title">Rate Confirmation Intake</h3>
+          <p class="card-desc">Structured AI workflow for processing broker rate confirmations end-to-end: intake, risk flagging, digital signing, broker reply, and bilingual driver dispatch — with nothing missed.</p>
+          <div class="chips">
+            <span class="chip">Claude API</span><span class="chip">Prompt Engineering</span><span class="chip">Bilingual Ops</span><span class="chip">Business Logic</span>
+          </div>
+          <p class="insight">"Flags only what costs money or damages relationships. Ignores what doesn't. That's the hard part."</p>
+        </div>
+
+        <div class="card" onclick="toggleCard(this)">
+          <p class="card-tag">React · Real Users</p>
+          <h3 class="card-title">La Esquinita POS</h3>
+          <p class="card-desc">Multi-cashier point-of-sale system for a strawberry desserts shop. Product customizations, modifier support, and daily sales reports — designed for speed under real pressure.</p>
+          <div class="chips">
+            <span class="chip">React</span><span class="chip">JavaScript</span><span class="chip">Custom UI</span><span class="chip">Sales Reports</span>
+          </div>
+          <p class="insight">"Built from scratch. Real cashiers. Real customers. Real pressure."</p>
+        </div>
+
+        <div class="card" onclick="toggleCard(this)">
+          <p class="card-tag">Enterprise · Zero-Error</p>
+          <h3 class="card-title">VBA / SharePoint Automation Suite</h3>
+          <p class="card-desc">Custom automation platform for industrial equipment procurement. Managed zero-error supply chains for Brose automotive (Querétaro) and Volkswagen (Silao) plants with long lead times on custom European equipment.</p>
+          <div class="chips">
+            <span class="chip">VBA</span><span class="chip">SharePoint</span><span class="chip">Google Cloud</span><span class="chip">Excel</span>
+          </div>
+          <p class="insight">"Long lead times on custom European equipment. Zero-error requirement. Delivered both."</p>
+        </div>
+
+      </div>
+
+      <!-- ASIS — full width -->
+      <div class="asis" onclick="this.classList.toggle('open')">
+        <div class="asis-inner">
+          <div>
+            <p class="card-tag">AI · Personal · Trust</p>
+            <h3 class="card-title" style="font-size:20px;">ASIS — Asistente MUY PERSONAL</h3>
+            <p class="card-desc">A deeply personal AI assistant built to handle what matters most. Private, precise, and completely trusted. Not every system is built for a client — this one is the proof that the conviction goes beyond the professional.</p>
+            <div class="chips" style="margin-top:16px;">
+              <span class="chip">Claude API</span><span class="chip">Personal AI</span><span class="chip">Custom Architecture</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;justify-content:center;">
+            <div class="asis-quote">
+              "You don't trust a technology with your most personal matters unless you truly believe in it. I built this for myself. That tells you everything about where I stand."
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="hint">Click any card to see the insight behind the build.</p>
+    </div>
+  </div>
+
+  <!-- STACK -->
+  <div class="section-block" id="stack">
+    <div class="wrap">
+      <p class="label">Tech Stack</p>
+      <h2 class="s-title">Tools I've shipped with.</h2>
+      <div class="stack-grid">
+        <div class="stack-block">
+          <p class="stack-cat">AI / ML</p>
+          <p class="stack-item">Google GenKit</p>
+          <p class="stack-item">Claude API</p>
+          <p class="stack-item">Firebase AI</p>
+          <p class="stack-item">Prompt Engineering</p>
+        </div>
+        <div class="stack-block">
+          <p class="stack-cat">Frontend</p>
+          <p class="stack-item">React</p>
+          <p class="stack-item">Next.js</p>
+          <p class="stack-item">TypeScript</p>
+          <p class="stack-item">Tailwind CSS</p>
+        </div>
+        <div class="stack-block">
+          <p class="stack-cat">Backend</p>
+          <p class="stack-item">Node.js</p>
+          <p class="stack-item">Firebase</p>
+          <p class="stack-item">Google Cloud</p>
+        </div>
+        <div class="stack-block">
+          <p class="stack-cat">Automation</p>
+          <p class="stack-item">VBA</p>
+          <p class="stack-item">SharePoint</p>
+          <p class="stack-item">Excel</p>
+        </div>
+        <div class="stack-block">
+          <p class="stack-cat">Infrastructure</p>
+          <p class="stack-item">Docker</p>
+          <p class="stack-item">Linux</p>
+          <p class="stack-item">Tailscale</p>
+        </div>
+        <div class="stack-block">
+          <p class="stack-cat">Dev Tools</p>
+          <p class="stack-item">VS Code</p>
+          <p class="stack-item">Git</p>
+          <p class="stack-item">Forgejo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section-block" id="contact">
+    <div class="wrap">
+      <p class="label">Contact</p>
+      <h2 class="s-title">The analysis is done.<br><span class="m">The decision is yours.</span></h2>
+      <p class="contact-body">If you're looking for someone who builds, iterates, and delivers with AI — not just talks about it — let's connect.</p>
+      <div class="contact-links">
+        <a href="mailto:everporras82@gmail.com" class="contact-link">
+          <span class="arrow">→</span>everporras82@gmail.com
+        </a>
+        <a href="https://github.com/everporras/portfolio-sagan" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="arrow">→</span>github.com/everporras/portfolio-sagan
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="f-copy">© 2025 Everardo Porras Muñoz</span>
+    <span class="f-tag">Built with AI. <em>Proof of concept.</em></span>
+  </footer>
+
+  <script>
+    /* ── Typing effect ── */
+    const FULL = "it's a proof of concept.";
+    const textEl = document.getElementById('typed-text');
+    let i = 0;
+    setTimeout(() => {
+      const t = setInterval(() => {
+        textEl.textContent = FULL.slice(0, ++i);
+        if (i >= FULL.length) clearInterval(t);
+      }, 44);
+    }, 1400);
+
+    /* ── Project card toggle ── */
+    function toggleCard(card) {
+      const wasOpen = card.classList.contains('open');
+      document.querySelectorAll('.card').forEach(c => {
+        c.classList.remove('open');
+        c.querySelector('.insight').style.display = 'none';
+      });
+      if (!wasOpen) {
+        card.classList.add('open');
+        card.querySelector('.insight').style.display = 'block';
+      }
+    }
+
+    /* ── Active nav link on scroll ── */
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = ['hero','about','projects','stack','contact'];
+    window.addEventListener('scroll', () => {
+      let current = 'hero';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 80) current = id;
+      });
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
